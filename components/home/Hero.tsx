@@ -1,19 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Crown, Mountain, Sprout, TrendingUp } from "lucide-react";
-
-const quadrants = [
-  { label: "FRUCTIFICAR", icon: Sprout },
-  { label: "MULTIPLICAR", icon: TrendingUp },
-  { label: "SOJUZGAR", icon: Mountain },
-  { label: "GOBERNAR", icon: Crown },
-];
+import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
   return (
     <section className="bg-navy">
-      <div className="mx-auto max-w-7xl px-6 py-16 md:py-20 grid gap-12 lg:grid-cols-2 lg:items-center">
-        <div>
+      <div className="mx-auto grid max-w-7xl lg:grid-cols-2">
+        <div className="flex flex-col justify-center px-6 py-16 md:py-20">
           <h1 className="font-serif text-4xl md:text-5xl font-semibold leading-tight text-white">
             El <span className="text-sage">diseño original</span> de Dios para administrar los recursos.
           </h1>
@@ -40,32 +33,16 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="relative mx-auto w-full max-w-2xl lg:max-w-none">
-          <div className="relative overflow-hidden rounded-xl">
-            <Image
-              src="/images/hero-desk.png"
-              alt="Laptop con el logo de Finanzas Sanas sobre un escritorio, junto a una Biblia abierta"
-              width={656}
-              height={424}
-              priority
-              className="h-auto w-full object-cover"
-            />
-            <div className="absolute inset-y-0 left-0 grid w-[46%] grid-cols-2 bg-navy">
-              {quadrants.map(({ label, icon: Icon }) => (
-                <div
-                  key={label}
-                  className="flex flex-col items-center justify-center gap-2 border border-white/10 px-2 py-4 text-center"
-                >
-                  <Icon className="text-sage" size={24} strokeWidth={1.5} />
-                  <span className="text-[10px] font-bold tracking-wide text-white/90 sm:text-xs">{label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="absolute left-[46%] top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-gold text-center text-white shadow-lg sm:h-20 sm:w-20">
-            <span className="text-[9px] font-bold tracking-wide sm:text-[10px]">GÉNESIS</span>
-            <span className="text-xs font-bold sm:text-sm">1:28</span>
-          </div>
+        <div className="relative min-h-[320px] lg:min-h-[560px]">
+          <Image
+            src="/images/hero-photo.png"
+            alt="Escritorio con laptop mostrando el logo de Finanzas Sanas, la tarjeta Fructificar/Multiplicar/Sojuzgar/Gobernar con el versículo Génesis 1:28, una Biblia abierta y libros"
+            fill
+            priority
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover"
+            style={{ objectPosition: "8% center" }}
+          />
         </div>
       </div>
     </section>
