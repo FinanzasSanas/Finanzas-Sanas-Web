@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 export default function Hero() {
   return (
     <section className="bg-navy">
-      <div className="mx-auto grid max-w-7xl lg:grid-cols-2">
+      <div className="mx-auto grid max-w-7xl lg:grid-cols-2 lg:items-center">
         <div className="flex flex-col justify-center px-6 py-16 md:py-20">
           <h1 className="font-serif text-4xl md:text-5xl font-semibold leading-tight text-white">
             El <span className="text-sage">diseño original</span> de Dios para administrar los recursos.
@@ -33,17 +33,20 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="relative min-h-[320px] lg:min-h-[560px]">
-          <Image
-            src="/images/hero-photo.png"
-            alt="Escritorio con laptop mostrando el logo de Finanzas Sanas, la tarjeta Fructificar/Multiplicar/Sojuzgar/Gobernar con el versículo Génesis 1:28, una Biblia abierta y libros"
-            fill
-            priority
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-cover"
-            style={{ objectPosition: "8% center" }}
-          />
-        </div>
+        <Image
+          src="/images/hero-photo.png"
+          alt="Escritorio con laptop mostrando el logo de Finanzas Sanas, la tarjeta Fructificar/Multiplicar/Sojuzgar/Gobernar con el versículo Génesis 1:28, una Biblia abierta y libros"
+          width={936}
+          height={424}
+          quality={90}
+          priority
+          sizes="(min-width: 1024px) 640px, 100vw"
+          className="h-auto w-full max-w-[936px] lg:ml-auto"
+          style={{
+            maskImage: "linear-gradient(to right, transparent 0%, transparent 12%, black 25%)",
+            WebkitMaskImage: "linear-gradient(to right, transparent 0%, transparent 12%, black 25%)",
+          }}
+        />
       </div>
     </section>
   );
