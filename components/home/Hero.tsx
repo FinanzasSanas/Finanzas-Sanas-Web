@@ -36,12 +36,12 @@ export default function Hero() {
         <Image
           src="/images/hero-photo.png"
           alt="Escritorio con laptop mostrando el logo de Finanzas Sanas, la tarjeta Fructificar/Multiplicar/Sojuzgar/Gobernar con el versículo Génesis 1:28, una Biblia abierta y libros"
-          width={936}
-          height={424}
+          width={1915}
+          height={821}
           quality={90}
           priority
           sizes="(min-width: 1024px) 640px, 100vw"
-          className="h-auto w-full max-w-[936px] lg:ml-auto"
+          className="h-auto w-full lg:ml-auto"
           style={{
             maskImage: "linear-gradient(to right, transparent 0%, transparent 12%, black 25%)",
             WebkitMaskImage: "linear-gradient(to right, transparent 0%, transparent 12%, black 25%)",
