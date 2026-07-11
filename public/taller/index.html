@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taller: Construye tu Radiografía Financiera</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --dark:#001527;
+  --dark2:#000E1C;
+  --forest:#0A3428;
+  --bg:#F4F2EF;
+  --bg2:#E5E9E4;
+  --card:#FFFFFF;
+  --ink:#14212E;
+  --ink-soft:#5A6570;
+  --coral:#BD8B40;
+  --coral-dark:#9C7132;
+  --gold:#C79A4B;
+  --sage:#6FA184;
+  --line:rgba(20,33,46,.13);
+  --red:#E8624A;
+  --yellow:#F0B93E;
+  --green:#4F9E72;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Montserrat',sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:760px; margin:0 auto; padding:44px 22px 100px;}
+h1,h2,h3{font-family:'Lora',serif; font-weight:600; margin:0 0 12px; color:var(--dark);}
+.eyebrow{font-size:12px; letter-spacing:.13em; text-transform:uppercase; color:var(--coral-dark); font-weight:800; margin-bottom:10px;}
+p{line-height:1.65; color:var(--ink-soft); margin:0 0 16px;}
+strong{color:var(--ink);}
+.hero-card strong{color:var(--gold);}
+
+.progress-wrap{margin-bottom:30px;}
+.brand-header{display:flex; align-items:center; gap:14px; margin-bottom:26px;}
+.brand-name{font-family:'Montserrat',sans-serif; font-weight:800; letter-spacing:.05em; font-size:15px; color:var(--dark);}
+.brand-tag{font-size:11.5px; color:var(--ink-soft); margin-top:2px;}
+.progress-track{height:8px; background:var(--line); border-radius:6px; overflow:hidden;}
+.progress-fill{height:100%; width:0%; background:linear-gradient(90deg,var(--sage),var(--gold),var(--coral)); border-radius:6px; transition:width .5s ease;}
+.progress-caption{display:flex; justify-content:space-between; font-size:12px; color:var(--ink-soft); margin-top:8px; letter-spacing:.02em;}
+
+.screen{display:none;}
+.screen.active{display:block; animation:fade .4s ease;}
+@keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+.hero-card{background:var(--dark); color:#EAF3EE; border-radius:10px; padding:38px 30px; position:relative; overflow:hidden;}
+.hero-card h1,.hero-card h2{color:#fff;}
+.hero-card p{color:#CBDDD3;}
+.hero-card .eyebrow{color:var(--gold);}
+.verse{font-family:'Lora',serif; font-style:italic; font-size:15px; border-left:3px solid var(--gold); padding-left:16px; margin:22px 0; color:#E9F1EC;}
+.verse cite{display:block; font-style:normal; font-size:12px; color:var(--gold); margin-top:6px; letter-spacing:.03em;}
+
+.btn{appearance:none; border:none; cursor:pointer; font-family:'Montserrat',sans-serif; font-weight:800; font-size:15px; border-radius:30px; padding:14px 28px; transition:transform .15s ease, background .2s ease;}
+.btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+.btn-primary{background:var(--coral); color:#fff;}
+.btn-primary:hover{transform:translateY(-1px); background:var(--coral-dark);}
+.btn-ghost{background:transparent; color:var(--ink); border:1.5px solid var(--line);}
+.btn-ghost:hover{background:rgba(0,0,0,.03);}
+.btn-row{display:flex; gap:12px; margin-top:28px; align-items:center; flex-wrap:wrap;}
+.btn[disabled]{opacity:.35; cursor:not-allowed; transform:none;}
+
+.section-card{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:30px 26px; margin-bottom:18px;}
+.section-card h3{font-size:19px;}
+.section-card .num{display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:var(--gold); color:#3A2A05; font-weight:800; font-size:13px; margin-right:10px;}
+
+label.field-label{display:block; font-weight:700; font-size:14px; color:var(--ink); margin:18px 0 8px;}
+label.field-label:first-of-type{margin-top:0;}
+textarea, input[type=text]{
+  width:100%; padding:12px 14px; border:1.5px solid var(--line); border-radius:8px;
+  font-family:'Montserrat',sans-serif; font-size:14.5px; color:var(--ink); background:#FFFDF9;
+}
+textarea{min-height:74px; resize:vertical;}
+textarea:focus, input:focus{outline:none; border-color:var(--sage);}
+
+.tag-select{display:flex; gap:8px; flex-wrap:wrap; margin-top:6px;}
+.tag-btn{padding:8px 14px; border-radius:20px; border:1.5px solid var(--line); background:#fff; font-size:13px; cursor:pointer; color:var(--ink-soft); font-weight:700;}
+.tag-btn.active{background:var(--coral); border-color:var(--coral); color:#fff;}
+
+.frase-row{display:flex; gap:10px; align-items:center; margin-bottom:10px;}
+.frase-num{width:22px; height:22px; border-radius:50%; background:var(--sage); color:#fff; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+
+.pattern-row{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:13px 0; border-bottom:1px solid var(--line);}
+.pattern-row:last-child{border-bottom:none;}
+.pattern-text{font-size:14.5px; color:var(--ink); flex:1;}
+.pattern-toggles{display:flex; gap:6px; flex-shrink:0;}
+.tg{width:34px; height:34px; border-radius:50%; border:2px solid var(--line); background:#fff; cursor:pointer; font-size:15px; display:flex; align-items:center; justify-content:center; transition:transform .12s ease;}
+.tg:hover{transform:scale(1.08);}
+.tg.sel-red{background:var(--red); border-color:var(--red);}
+.tg.sel-yellow{background:var(--yellow); border-color:var(--yellow);}
+.tg.sel-green{background:var(--green); border-color:var(--green);}
+.legend{display:flex; gap:18px; flex-wrap:wrap; font-size:12.5px; color:var(--ink-soft); margin:14px 0 6px;}
+.legend span{display:inline-flex; align-items:center; gap:6px;}
+.dot{width:11px; height:11px; border-radius:50%; display:inline-block;}
+.dot.r{background:var(--red);} .dot.y{background:var(--yellow);} .dot.g{background:var(--green);}
+
+.summary-box{background:var(--bg2); border-radius:8px; padding:18px 20px; margin-top:16px; font-size:14px;}
+.summary-box b{color:var(--dark);}
+
+.q-count{font-size:13px; color:var(--ink-soft); margin-bottom:6px; font-weight:700;}
+.q-card{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:30px 26px;}
+.q-text{font-family:'Lora',serif; font-size:20px; line-height:1.4; color:var(--ink); margin-bottom:24px;}
+.scale{display:flex; flex-direction:column; gap:8px;}
+.opt{display:flex; align-items:center; gap:14px; padding:12px 14px; border:1.5px solid var(--line); border-radius:8px; cursor:pointer; background:#FFFDF9; transition:border-color .15s ease, background .15s ease;}
+.opt:hover{border-color:var(--sage);}
+.opt input{accent-color:var(--coral); width:16px; height:16px;}
+.opt span{font-size:14.5px; color:var(--ink);}
+.opt.selected{border-color:var(--coral); background:#FFF0EB;}
+
+.avatar-hero{background:var(--dark); color:#EAF3EE; padding:34px 28px; border-radius:10px; margin-bottom:22px;}
+.avatar-hero .eyebrow{color:var(--gold);}
+.avatar-hero h2{color:#fff; font-size:25px;}
+.orig-word{display:inline-flex; align-items:baseline; gap:8px; background:rgba(245,185,66,.15); border:1px solid rgba(245,185,66,.4); padding:6px 12px; border-radius:6px; margin:10px 0 4px;}
+.orig-word .term{font-family:'Lora',serif; font-style:italic; color:var(--gold); font-size:16px;}
+.orig-word .gloss{font-size:12.5px; color:#CBDDD3;}
+
+.bars{margin:26px 0;}
+.bar-row{margin-bottom:15px;}
+.bar-label{display:flex; justify-content:space-between; font-size:13px; margin-bottom:6px; color:var(--ink-soft); font-weight:700;}
+.bar-track{height:10px; background:var(--line); border-radius:6px; overflow:hidden;}
+.bar-fill{height:100%; background:var(--sage); border-radius:6px; width:0%; transition:width .8s ease;}
+.bar-fill.top{background:var(--coral);}
+
+.detail-card{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:26px 24px; margin-bottom:16px;}
+.detail-card h3{font-size:18px; margin-bottom:8px;}
+.detail-card .verse{color:var(--ink-soft); border-left-color:var(--sage); margin:16px 0 0;}
+.detail-card .verse cite{color:var(--dark);}
+.tag{font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; padding:4px 10px; border-radius:20px; border:1px solid var(--line); color:var(--ink-soft);}
+
+.identity-box{background:var(--bg2); border-radius:10px; padding:22px 24px; margin:22px 0;}
+.identity-box .name{font-family:'Lora',serif; font-size:22px; color:var(--dark); margin:4px 0 0;}
+.summary-preview-wrap{margin:0 0 26px;}
+
+.step-card{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:22px 22px; margin-bottom:14px;}
+.step-card p.hint{font-size:13px; color:var(--ink-soft); margin-top:-4px; margin-bottom:10px;}
+.step-num{background:var(--coral); display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%; color:#fff; font-size:12px; font-weight:800; margin-right:8px;}
+
+footer.note{text-align:center; font-size:12.5px; color:var(--ink-soft); margin-top:36px;}
+
+@media(max-width:520px){
+  .wrap{padding:30px 15px 80px;}
+  .hero-card, .section-card, .q-card, .avatar-hero{padding:24px 18px;}
+  .q-text{font-size:18px;}
+  .pattern-row{flex-direction:column; align-items:flex-start; gap:8px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="brand-header">
+    <svg viewBox="0 0 100 100" width="46" height="46" aria-hidden="true">
+      <rect x="3" y="3" width="94" height="94" fill="none" stroke="var(--dark)" stroke-width="3"/>
+      <line x1="50" y1="3" x2="50" y2="97" stroke="var(--dark)" stroke-width="2"/>
+      <line x1="3" y1="50" x2="97" y2="50" stroke="var(--dark)" stroke-width="2"/>
+      <path d="M25 36 Q14 25 25 14 Q36 25 25 36 Z M25 18 L25 32" fill="none" stroke="var(--sage)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <g stroke="var(--coral)" stroke-width="2.6" fill="none" stroke-linecap="round">
+        <line x1="62" y1="36" x2="62" y2="24"/>
+        <line x1="70" y1="36" x2="70" y2="15"/>
+        <line x1="78" y1="36" x2="78" y2="27"/>
+        <path d="M60 22 L70 12 L80 24" stroke-linejoin="round"/>
+      </g>
+      <path d="M12 84 L25 62 L38 84 Z" fill="none" stroke="var(--sage)" stroke-width="2.6" stroke-linejoin="round"/>
+      <path d="M61 84 L61 74 L69 80 L74 66 L79 80 L87 74 L87 84 Z" fill="none" stroke="var(--coral)" stroke-width="2.4" stroke-linejoin="round"/>
+    </svg>
+    <div class="brand-text">
+      <div class="brand-name">FINANZAS SANAS</div>
+      <div class="brand-tag">Administra como Dios diseñó.</div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-caption"><span id="progressLabel">Semilla · 0 de 4</span><span id="progressPct">0%</span></div>
+  </div>
+
+  <section class="screen active" id="screen-registro">
+    <div class="hero-card">
+      <div class="eyebrow">Antes de comenzar</div>
+      <h1>Cuéntanos quién eres</h1>
+      <p>Tu nombre y correo nos permiten guardar tu proceso de forma privada para tu acompañamiento pastoral. No compartimos tus datos con terceros.</p>
+    </div>
+    <div class="section-card">
+      <label class="field-label" style="margin-top:0;">Nombre</label>
+      <input type="text" id="regNombre" placeholder="Tu nombre completo">
+      <label class="field-label">Correo</label>
+      <input type="text" id="regCorreo" placeholder="tucorreo@ejemplo.com">
+      <p id="regError" style="display:none; color:var(--red); font-size:13px; margin:10px 0 0;">Por favor completa tu nombre y correo.</p>
+    </div>
+    <div class="btn-row"><button class="btn btn-primary" id="btnRegistro" onclick="submitRegistro()">Comenzar</button></div>
+  </section>
+
+  <section class="screen" id="screen-intro">
+    <div class="hero-card">
+      <div class="eyebrow">Módulo 3 · Taller</div>
+      <h1>Construye tu radiografía financiera</h1>
+      <p>La forma como manejas tu dinero es una expresión externa de una condición interna. Antes de renovar tu mente con fundamentos bíblicos, necesitas ver con honestidad qué está sembrado en tu corazón hoy.</p>
+      <div class="verse">No imiten las conductas ni las costumbres de este mundo; más bien, dejen que Dios los transforme en personas nuevas al cambiarles la manera de pensar.<cite>Romanos 12:2, NTV</cite></div>
+      <p style="color:#B9CFC4; font-size:13px; margin-bottom:0;">Este taller tiene 3 ejercicios: tu memoria financiera, tu espejo financiero y tu avatar financiero. Al final descubrirás tu personalidad financiera y comenzarás el proceso de renovación. Este es un espacio seguro entre tú y Dios — mientras más honesto/a seas, más profunda será tu sanidad. No hay respuestas correctas o incorrectas, solo la verdad que te va a hacer libre.</p>
+    </div>
+    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('memoria')">Comenzar el taller</button></div>
+  </section>
+
+  <section class="screen" id="screen-memoria">
+    <div class="eyebrow">Ejercicio práctico 1</div>
+    <h2>Mi memoria financiera</h2>
+    <p>Nuestro condicionamiento subconsciente determina nuestro pensamiento. Responde cada pregunta con mucha honestidad — no hay respuestas correctas.</p>
+
+    <div class="section-card">
+      <label class="field-label">Cierra los ojos un momento y vuelve a tu niñez: ¿qué recuerdos vienen a tu mente sobre cómo se hablaba —o se evitaba hablar— del dinero en tu casa?</label>
+      <textarea id="m1"></textarea>
+
+      <label class="field-label">¿Qué frases sobre el dinero escuchabas una y otra vez de tus padres o cuidadores?</label>
+      <textarea id="m2"></textarea>
+
+      <label class="field-label">Si tuvieras que describir el ambiente alrededor del dinero en tu hogar en una palabra, ¿sería escasez, abundancia o temor constante? Cuéntame por qué.</label>
+      <textarea id="m3"></textarea>
+
+      <label class="field-label">¿Recuerdas discusiones, tensión o silencios incómodos relacionados con el dinero entre los adultos de tu casa?</label>
+      <textarea id="m4"></textarea>
+
+      <label class="field-label">¿Qué emociones asocias hoy al dinero?</label>
+      <div class="tag-select" id="emotionTags"></div>
+
+      <label class="field-label" style="margin-top:24px;">Escribe 3 frases que marcaron tu infancia financiera</label>
+      <div class="frase-row"><div class="frase-num">1</div><input type="text" id="frase1" placeholder="Ej: 'Aquí no hay para eso'"></div>
+      <div class="frase-row"><div class="frase-num">2</div><input type="text" id="frase2" placeholder="Escribe la segunda frase"></div>
+      <div class="frase-row"><div class="frase-num">3</div><input type="text" id="frase3" placeholder="Escribe la tercera frase"></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="goTo('intro')">Atrás</button>
+      <button class="btn btn-primary" onclick="goTo('espejo')">Continuar al ejercicio 2</button>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-espejo">
+    <div class="eyebrow">Ejercicio práctico 2</div>
+    <h2>Mi espejo financiero</h2>
+    <p>Mira esta lista de patrones financieros errados y marca con honestidad en cuál de las tres etapas te encuentras hoy con cada uno.</p>
+    <div class="legend">
+      <span><span class="dot r"></span> Lo vivo hoy</span>
+      <span><span class="dot y"></span> Sé que está mal, pero aún lo practico</span>
+      <span><span class="dot g"></span> Ya lo superé</span>
+    </div>
+    <div class="section-card" id="patternList"></div>
+
+    <div class="section-card">
+      <label class="field-label" style="margin-top:0;">💡 ¿Qué patrón sientes que se repite más en tu vida?</label>
+      <textarea id="p_reflect1"></textarea>
+      <label class="field-label">💡 ¿Cuál de estos patrones te ha costado más dinero y más paz?</label>
+      <textarea id="p_reflect2"></textarea>
+      <div class="summary-box" id="patternSummary">Marca algunos patrones arriba para ver tu resumen aquí.</div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="goTo('memoria')">Atrás</button>
+      <button class="btn btn-primary" onclick="goTo('avatarIntro')">Continuar al ejercicio 3</button>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-avatarIntro">
+    <div class="eyebrow">Ejercicio práctico 3</div>
+    <h2>Tu avatar financiero</h2>
+    <p>Hay cuatro personalidades típicas frente al dinero. Vas a responder 16 afirmaciones cortas — sé honesto/a con tu primera reacción, no con lo que "deberías" sentir. Al final descubrirás tu personalidad financiera dominante y su raíz bíblica.</p>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="goTo('espejo')">Atrás</button>
+      <button class="btn btn-primary" onclick="startQuiz()">Comenzar las 16 afirmaciones</button>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-quiz">
+    <div class="q-count" id="qCount">Afirmación 1 de 16</div>
+    <div class="q-card">
+      <div class="q-text" id="qText">—</div>
+      <div class="scale" id="qScale"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" id="btnBack" onclick="prevQ()">Atrás</button>
+      <button class="btn btn-primary" id="btnNext" onclick="nextQ()" disabled>Siguiente</button>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-results">
+    <div class="avatar-hero">
+      <div class="eyebrow">Tu avatar financiero dominante</div>
+      <h2 id="resTitle">—</h2>
+      <p id="resDesc" style="margin-top:4px;">—</p>
+      <div class="orig-word"><span class="term" id="resTerm">—</span><span class="gloss" id="resGloss">—</span></div>
+      <p id="resIntro" style="margin-top:14px; margin-bottom:0;">—</p>
+    </div>
+
+    <div class="identity-box">
+      <div class="eyebrow" style="color:var(--dark);">Mi personalidad financiera es</div>
+      <div class="name" id="identityName">—</div>
+      <button class="btn btn-primary" style="margin-top:16px;" onclick="generateSummaryImage()">📸 Generar mi imagen resumen</button>
+    </div>
+
+    <div class="summary-preview-wrap" id="summaryPreviewWrap" style="display:none;">
+      <img id="summaryPreviewImg" alt="Imagen resumen de tu diagnóstico financiero" style="width:100%; border-radius:10px; border:1px solid var(--line); margin-bottom:14px;">
+      <a id="summaryDownloadLink" class="btn btn-primary" download="mi-diagnostico-financiero.png" style="display:inline-block; text-decoration:none;">Descargar imagen</a>
+      <p style="font-size:12.5px; margin-top:10px;">En celular: mantén presionada la imagen para guardarla si el botón no descarga automáticamente.</p>
+    </div>
+    <canvas id="summaryCanvas" width="1080" height="1350" style="display:none;"></canvas>
+
+    <h3 style="margin-bottom:14px;">Tu mapa completo de los 4 avatares</h3>
+    <div class="bars" id="bars"></div>
+    <div id="detailCards"></div>
+
+    <div class="section-card">
+      <label class="field-label" style="margin-top:0;">Mis fortalezas frente al dinero son:</label>
+      <textarea id="fortalezas"></textarea>
+      <label class="field-label">Mis oportunidades de mejora frente al dinero son:</label>
+      <textarea id="oportunidades"></textarea>
+    </div>
+
+    <div class="hero-card" style="margin:34px 0 22px;">
+      <div class="eyebrow">Ahora, el camino de renovación</div>
+      <div class="verse" style="margin-top:6px;">Capturamos los pensamientos rebeldes y enseñamos a las personas a obedecer a Cristo.<cite>2 Corintios 10:5, NTV</cite></div>
+      <p style="margin-bottom:0;">Identificar tu patrón no es el final — es el comienzo de una guerra que se pelea y se gana en la mente. Cada pensamiento que has cargado sobre el dinero desde tu niñez puede ser "capturado" y puesto bajo el señorío de Cristo. No se trata de fuerza de voluntad, sino de revelación: cuando la verdad de la Palabra entra a un lugar donde antes solo había una mentira aprendida, esa mentira pierde su poder. Este es el modelo de 4 pasos que vamos a usar para hacer justamente eso, antes de pasar al Módulo 4.</p>
+    </div>
+
+    <div class="step-card">
+      <h3 style="font-size:16px; margin-bottom:6px;"><span class="step-num">1</span>Conciencia</h3>
+      <p class="hint">Escribe las afirmaciones que crees no te han dejado avanzar y consideras son contrarias a la palabra de Dios, además de los hábitos incorrectos de tus padres frente al dinero. ¿En qué eres igual o diferente a ellos?</p>
+      <textarea id="step1"></textarea>
+    </div>
+    <div class="step-card">
+      <h3 style="font-size:16px; margin-bottom:6px;"><span class="step-num">2</span>Comprensión</h3>
+      <p class="hint">¿Cómo crees que esto te ha afectado hasta este momento? Escribe el efecto que ha tenido en tu vida.</p>
+      <textarea id="step2"></textarea>
+    </div>
+    <div class="step-card">
+      <h3 style="font-size:16px; margin-bottom:6px;"><span class="step-num">3</span>Disociación</h3>
+      <p class="hint">Esos pensamientos solo representan lo que aprendiste de tus experiencias y conclusiones — no es lo que ahora eliges creer y aceptar que Dios dice en Su palabra frente al dinero. Escribe, a modo de declaración, lo que eliges soltar y lo que eliges recibir de parte de Dios.</p>
+      <textarea id="step3"></textarea>
+    </div>
+    <div class="step-card">
+      <h3 style="font-size:16px; margin-bottom:6px;"><span class="step-num">4</span>Verdad bíblica</h3>
+      <p class="hint">¿Qué dice la Palabra acerca del dinero en este punto? Escribe cuál es tu nueva realidad frente a esta creencia.</p>
+      <textarea id="step4"></textarea>
+    </div>
+
+    <div class="hero-card" id="conclusionBox" style="margin-top:34px;">
+      <div class="eyebrow">Para cerrar este taller</div>
+      <h2 style="font-size:23px;">Esto no es para vergüenza, es para libertad</h2>
+      <p>Antes de que sigas al Módulo 4, quiero detenerte un momento. Nada de lo que acabas de escribir es para que sientas culpa o condenación — es para que veas con claridad lo que Dios ya está dispuesto a sanar. No hay ninguna raíz que hayas descubierto hoy que sea más grande que Su gracia.</p>
+
+      <p style="margin-top:20px;"><strong>Sobre tu memoria financiera:</strong> esas historias de tu niñez formaron una parte real de lo que crees hoy, pero no tienen que seguir escribiendo tu futuro.</p>
+      <div class="verse">Olviden las cosas de antaño; ya no vivan en el pasado. Pues estoy a punto de hacer algo nuevo.<cite>Isaías 43:18-19, NTV</cite></div>
+
+      <p style="margin-top:20px;"><strong>Sobre tu espejo financiero:</strong> nombrar un patrón no es quedarte atrapado/a en él — es el primer paso para que esa atadura pierda su fuerza sobre ti.</p>
+      <div class="verse">Por eso, si yo, el Hijo de Dios, les perdono sus pecados, serán libres de verdad.<cite>Juan 8:36, NTV</cite></div>
+
+      <p style="margin-top:20px;"><strong>Sobre tu avatar financiero:</strong> el patrón que identificaste hoy describe cómo has vivido, no quién eres para siempre. Tu identidad ya no está definida por tu manera de manejar el dinero, sino por lo que Cristo dice de ti.</p>
+      <div class="verse">Todo el que pertenece a Cristo se ha convertido en una persona nueva. La vida antigua ha pasado; ¡una nueva vida ha comenzado!<cite>2 Corintios 5:17, NTV</cite></div>
+
+      <p style="margin-top:24px; margin-bottom:0; color:#E9F1EC;">Hoy comienza una nueva temporada para tu vida, Dios está cambiando las mentiras por sus verdades eternas, y conocer esas verdades nos hace libres. En los siguientes módulos comprenderás cuáles son esas verdades bíblicas financieras que serán el nuevo fundamento sobre el cual se edifica esta nueva temporada para tus finanzas.</p>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" id="btnGuardarTaller" onclick="saveTaller()">Guardar mi taller</button>
+      <button class="btn btn-ghost" onclick="restart()">Repetir el taller</button>
+    </div>
+    <p id="guardarStatus" style="font-size:13px; margin-top:10px;"></p>
+    <footer class="note">Este taller es una herramienta de reflexión pastoral, no un instrumento clínico. Tus respuestas se guardan de forma privada para tu acompañamiento pastoral y no se comparten con terceros.</footer>
+  </section>
+
+</div>
+
+<script type="module">
+  import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+  try {
+    window.supabase = createClient(
+      'https://iyszyhghjthearwxhuix.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml5c3p5aGdoanRoZWFyd3hodWl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM3MDg4NDEsImV4cCI6MjA5OTI4NDg0MX0.z_9YbQVWDH8X4MSSY90wFiQKQVOiArC-eKU6lWwaaCE'
+    );
+  } catch (e) {
+    console.warn('No se pudo inicializar Supabase:', e);
+  }
+</script>
+
+<script>
+const SECTION_WEIGHT = {registro:0, intro:0, memoria:1, espejo:2, avatarIntro:3, quiz:3, results:4};
+const SECTION_LABEL = {registro:"Semilla", intro:"Semilla", memoria:"Raíz", espejo:"Raíz", avatarIntro:"Tronco", quiz:"Tronco", results:"Fruto"};
+
+let regNombre = '';
+let regCorreo = '';
+
+async function submitRegistro(){
+  const nombre = document.getElementById('regNombre').value.trim();
+  const correo = document.getElementById('regCorreo').value.trim();
+  const errEl = document.getElementById('regError');
+  if(!nombre || !correo){
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
+  regNombre = nombre;
+  regCorreo = correo;
+
+  const btn = document.getElementById('btnRegistro');
+  btn.disabled = true;
+  btn.textContent = 'Guardando...';
+  try{
+    if(window.supabase){
+      const { error } = await window.supabase.from('workshop_registrations').insert({ nombre, correo });
+      if(error) throw error;
+    }
+  }catch(e){
+    console.warn('No se pudo guardar el registro:', e);
+  }
+  btn.disabled = false;
+  btn.textContent = 'Comenzar';
+  goTo('intro');
+}
+
+async function saveTaller(){
+  if(!lastResult) return;
+  const btn = document.getElementById('btnGuardarTaller');
+  const statusEl = document.getElementById('guardarStatus');
+  btn.disabled = true;
+  btn.textContent = 'Guardando...';
+
+  const payload = {
+    nombre: regNombre,
+    correo: regCorreo,
+    avatar_dominante: lastResult.top.title,
+    avatar_secundario: lastResult.second.title,
+    scores: { topPct: lastResult.topPct },
+    respuestas: {
+      memoria: {
+        m1: document.getElementById('m1').value,
+        m2: document.getElementById('m2').value,
+        m3: document.getElementById('m3').value,
+        m4: document.getElementById('m4').value,
+        emociones: Object.keys(emoTagState).filter(k=>emoTagState[k]),
+        frases: [
+          document.getElementById('frase1').value,
+          document.getElementById('frase2').value,
+          document.getElementById('frase3').value
+        ]
+      },
+      espejo: {
+        patrones: patternState,
+        reflexion1: document.getElementById('p_reflect1').value,
+        reflexion2: document.getElementById('p_reflect2').value
+      },
+      avatarRespuestas: answers,
+      fortalezas: document.getElementById('fortalezas').value,
+      oportunidades: document.getElementById('oportunidades').value,
+      pasos: {
+        conciencia: document.getElementById('step1').value,
+        comprension: document.getElementById('step2').value,
+        disociacion: document.getElementById('step3').value,
+        verdad: document.getElementById('step4').value
+      }
+    }
+  };
+
+  try{
+    if(!window.supabase) throw new Error('Supabase no disponible');
+    const { error } = await window.supabase.from('workshop_results').insert(payload);
+    if(error) throw error;
+    statusEl.textContent = '✓ Tus respuestas fueron guardadas de forma privada.';
+    statusEl.style.color = 'var(--green)';
+  }catch(e){
+    console.warn('No se pudo guardar el taller:', e);
+    statusEl.textContent = 'No pudimos guardar tus respuestas ahora. Puedes intentar de nuevo.';
+    statusEl.style.color = 'var(--red)';
+  }
+  btn.disabled = false;
+  btn.textContent = 'Guardar mi taller';
+}
+
+function goTo(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen-'+id).classList.add('active');
+  updateProgress(id);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function updateProgress(id){
+  const w = SECTION_WEIGHT[id];
+  const pct = Math.round((w/4)*100);
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressLabel').textContent = SECTION_LABEL[id] + ' · ' + w + ' de 4';
+  document.getElementById('progressPct').textContent = pct+'%';
+}
+
+const EMOTIONS = ["Miedo","Culpa","Vergüenza","Ansiedad","Ira","Tristeza","Envidia","Control","Poder","Desconfianza","Libertad","Alivio","Paz","Seguridad"];
+const emoTagState = {};
+function renderEmotionTags(){
+  const el = document.getElementById('emotionTags');
+  EMOTIONS.forEach(e=>{
+    const b = document.createElement('button');
+    b.type='button'; b.className='tag-btn'; b.textContent=e;
+    b.onclick = ()=>{ emoTagState[e] = !emoTagState[e]; b.classList.toggle('active'); };
+    el.appendChild(b);
+  });
+}
+renderEmotionTags();
+
+const PATTERNS = [
+  {neg:"Gastar más de lo que se gana", pos:"Gastas dentro de lo que ganas"},
+  {neg:"Endeudarse para sostener el estilo de vida", pos:"Sostienes tu estilo de vida sin depender de deudas"},
+  {neg:"Gasto compulsivo", pos:"Compras con intención, no por impulso"},
+  {neg:"Confundir deseo con necesidad", pos:"Distingues con claridad entre deseo y necesidad"},
+  {neg:"Normalizar la deuda", pos:"Ves la deuda como una excepción, no como algo normal"},
+  {neg:"Pagar una deuda con otra deuda", pos:"Pagas tus deudas sin generar deudas nuevas"},
+  {neg:"No llevar control del dinero", pos:"Llevas un control claro de tu dinero"},
+  {neg:"Usar el crédito como ingreso adicional", pos:"Usas el crédito con responsabilidad, no como ingreso"},
+  {neg:"Evitar enfrentar la realidad financiera", pos:"Enfrentas tu realidad financiera con honestidad"},
+  {neg:"Falta de planificación y ahorro", pos:"Planificas y ahorras con constancia"},
+  {neg:"Decisiones emocionales con el dinero", pos:"Tomas decisiones financieras con calma, no por emoción"},
+  {neg:"Creer que la riqueza no es para disfrutar", pos:"Disfrutas con libertad lo que Dios te ha dado"},
+  {neg:"No ser generoso", pos:"Vives con generosidad"},
+  {neg:"El fin justifica los medios", pos:"Actúas con integridad, sin importar el resultado"}
+];
+const patternState = new Array(PATTERNS.length).fill(0);
+
+function renderPatterns(){
+  const list = document.getElementById('patternList');
+  PATTERNS.forEach((p,i)=>{
+    const row = document.createElement('div');
+    row.className='pattern-row';
+    row.innerHTML = `
+      <div class="pattern-text">${p.neg}</div>
+      <div class="pattern-toggles">
+        <div class="tg" data-i="${i}" data-v="1" title="Lo vivo hoy">🔴</div>
+        <div class="tg" data-i="${i}" data-v="2" title="Sé que está mal, pero aún lo practico">🟡</div>
+        <div class="tg" data-i="${i}" data-v="3" title="Ya lo superé">🟢</div>
+      </div>`;
+    list.appendChild(row);
+  });
+  list.querySelectorAll('.tg').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const i = +btn.dataset.i, v = +btn.dataset.v;
+      patternState[i] = (patternState[i]===v) ? 0 : v;
+      refreshPatternUI();
+      refreshSummary();
+    });
+  });
+}
+function refreshPatternUI(){
+  document.querySelectorAll('.tg').forEach(btn=>{
+    const i = +btn.dataset.i, v = +btn.dataset.v;
+    btn.classList.remove('sel-red','sel-yellow','sel-green');
+    if(patternState[i]===v){
+      if(v===1) btn.classList.add('sel-red');
+      if(v===2) btn.classList.add('sel-yellow');
+      if(v===3) btn.classList.add('sel-green');
+    }
+  });
+}
+function refreshSummary(){
+  const red = PATTERNS.filter((_,i)=>patternState[i]===1).map(p=>p.neg);
+  const yellow = PATTERNS.filter((_,i)=>patternState[i]===2).map(p=>p.neg);
+  const green = PATTERNS.filter((_,i)=>patternState[i]===3).map(p=>p.pos);
+  const box = document.getElementById('patternSummary');
+  if(red.length===0 && yellow.length===0 && green.length===0){
+    box.textContent = "Marca algunos patrones arriba para ver tu resumen aquí.";
+    return;
+  }
+  box.innerHTML = `<b>${red.length}</b> patrones que vives hoy · <b>${yellow.length}</b> de los que ya eres consciente pero aún practicas · <b>${green.length}</b> que ya superaste.` +
+    (red.length ? `<br><br><b>Hoy luchas principalmente con:</b> ${red.join(', ')}.` : '') +
+    (green.length ? `<br><br><b>🌱 Y esto ya es una victoria real en tu vida:</b> ${green.join(', ')}. No lo minimices — cada patrón que superas es evidencia de que Dios ya está haciendo una obra en ti.` : '');
+}
+renderPatterns();
+
+const AVATARS = {
+  impulsivo: {
+    title: "El Impulsivo",
+    desc: "Vive el presente y toma decisiones rápidas con el dinero. Gasta movido por emociones, deseos o presión del momento. Le cuesta planificar, ahorrar y pensar a largo plazo.",
+    term: "kesíl (כְּסִיל)",
+    gloss: "hebreo: el que actúa sin pausa ni reflexión, dejándose llevar por el impulso del momento",
+    intro: "Si te identificas con esto, quiero que sepas algo primero: no naciste así, y no te vas a quedar así. Tu dinero se va rápido porque tus decisiones nacen de la emoción del momento, no de un plan — y eso no es un defecto de carácter, es un patrón aprendido que se puede desaprender. Dios no te está señalando, te está invitando a un espacio entre el impulso y la acción donde Él quiere darte sabiduría.",
+    verseText: "El sabio ahorra para el futuro, pero el necio gasta todo lo que gana.",
+    verseCite: "Proverbios 21:20 (paráfrasis)",
+    application: "Aplicación financiera y esperanza: la impulsividad se combate con fricción, no con culpa. Un presupuesto simple y una pausa de 24 horas antes de cualquier compra no esencial son tus primeras herramientas del Módulo 5 — pequeños pasos que, sostenidos con gracia, se convierten en una nueva identidad."
+  },
+  controlador: {
+    title: "El Controlador",
+    desc: "Necesita tener todo bajo control. Ahorra y evita el riesgo. Siente miedo a perder o a no tener suficiente. Puede ser rígido, ansioso, y le cuesta delegar o disfrutar del dinero.",
+    term: "deilía (δειλία)",
+    gloss: "griego: temor que encoge el corazón — la misma palabra que Pablo usa en 2 Timoteo 1:7",
+    intro: "Si te reconoces aquí, no estás roto/a — estás cansado/a de cargar solo/a el peso de que todo salga bien. Como el siervo de un solo talento, has escondido lo que tienes por miedo en lugar de multiplicarlo por fe. Pero esto tiene una salida hermosa: el mismo Dios que te pide fidelidad es el que promete cuidar de ti. No tienes que controlarlo todo para estar seguro/a — puedes soltar el control y descansar en Su provisión.",
+    verseText: "Tuve miedo, y fui y escondí tu talento en la tierra.",
+    verseCite: "Mateo 25:25",
+    application: "Aplicación financiera y esperanza: la buena mayordomía planea, pero no se aferra. Practicar disfrutar una compra pequeña sin culpa, o delegar una decisión financiera, son pasos de fe que te van a llevar del control al descanso — sin perder el orden."
+  },
+  indiferente: {
+    title: "El Indiferente",
+    desc: "Evita mirar su realidad financiera. No lleva control, posterga decisiones y responsabilidades. Si tiene dinero, derrocha; si no tiene, se esconde.",
+    term: "atsél (עָצֵל)",
+    gloss: "hebreo: negligente, el que se aparta de la responsabilidad — no por maldad, sino por evitación",
+    intro: "Si esto te describe, probablemente no es pereza — es que en algún momento mirar de frente el dinero dolió tanto que aprendiste a mirar hacia otro lado. Dios no viene a exponerte, viene a encender la luz contigo, con paciencia. La Biblia compara esto con un campo abandonado que se llena de maleza — pero un campo abandonado también puede volver a dar fruto cuando alguien decide cuidarlo de nuevo. Ese alguien puedes ser tú, hoy.",
+    verseText: "Pasé por el campo del perezoso, y todo estaba lleno de espinos.",
+    verseCite: "Proverbios 24:30-31 (paráfrasis)",
+    application: "Aplicación financiera y esperanza: el primer paso no es un presupuesto perfecto, es simplemente mirar, sin juicio. Abrir el estado de cuenta una vez, con calma, es ya un acto de fe y de valentía que el Módulo 5 te va a ayudar a sostener."
+  },
+  equilibrado: {
+    title: "El Equilibrado",
+    desc: "Planifica, administra y toma decisiones conscientes. Disfruta lo que tiene sin culpa ni exceso. Ordenado, generoso y responsable.",
+    term: "oikonómos pistós (οἰκονόμος πιστός)",
+    gloss: "griego: mayordomo fiel, administrador digno de la confianza de su amo",
+    intro: "Esto no es un logro tuyo para presumir, es una gracia que Dios está formando en ti — y vale la pena reconocerla y agradecerla. Estás caminando hacia el diseño original de Génesis 1:28 y la parábola de los talentos: alguien que administra con orden, multiplica con sabiduría y disfruta con gratitud, sin que el dinero gobierne su corazón. Sigue avanzando, con humildad, un paso a la vez.",
+    verseText: "El que es fiel en lo poco, también en lo mucho es fiel.",
+    verseCite: "Lucas 16:10",
+    application: "Aplicación financiera y esperanza: tu tarea ahora es afinar el sistema — protegerlo de la comparación, sostenerlo con generosidad y usarlo para multiplicar con propósito en los próximos módulos. Lo que Dios comenzó en ti, Él lo quiere llevar más lejos."
+  }
+};
+
+const QUESTIONS = [
+  {cat:"impulsivo", text:"Compro cosas sin planearlo, movido/a por la emoción del momento."},
+  {cat:"controlador", text:"Me cuesta gastar dinero incluso cuando puedo hacerlo; siento culpa o miedo."},
+  {cat:"indiferente", text:"Evito revisar mis cuentas o saber exactamente cuánto tengo o debo."},
+  {cat:"equilibrado", text:"Reviso mis finanzas con regularidad y sé en qué se va mi dinero."},
+  {cat:"impulsivo", text:"Me cuesta esperar; si quiero algo, encuentro la forma de tenerlo ya."},
+  {cat:"controlador", text:"Necesito tener el control total de cada peso; delegar me genera ansiedad."},
+  {cat:"indiferente", text:"Postergo decisiones financieras importantes hasta que ya no puedo evitarlas."},
+  {cat:"equilibrado", text:"Disfruto lo que tengo sin culpa, pero también pienso en mi futuro."},
+  {cat:"impulsivo", text:"Rara vez pienso en las consecuencias a largo plazo de un gasto."},
+  {cat:"controlador", text:"Ahorro más por miedo a quedarme sin nada que por un propósito claro."},
+  {cat:"indiferente", text:"Cuando tengo dinero lo gasto sin medir; cuando no tengo, prefiero no pensar en eso."},
+  {cat:"equilibrado", text:"Soy generoso/a con lo que tengo y eso no me genera ansiedad."},
+  {cat:"impulsivo", text:"Gasto para sentirme mejor cuando estoy estresado/a, triste o ansioso/a."},
+  {cat:"controlador", text:"Me cuesta disfrutar del dinero que tengo; siempre siento que no es suficiente."},
+  {cat:"indiferente", text:"No llevo ningún tipo de registro o control de mis gastos."},
+  {cat:"equilibrado", text:"Tomo decisiones financieras con calma, no por impulso ni por miedo."},
+];
+const LABELS = ["Totalmente en desacuerdo","En desacuerdo","Neutral","De acuerdo","Totalmente de acuerdo"];
+
+let current = 0;
+let answers = new Array(QUESTIONS.length).fill(null);
+let lastResult = null;
+
+function startQuiz(){ goTo('quiz'); renderQuestion(); }
+
+function renderQuestion(){
+  const q = QUESTIONS[current];
+  document.getElementById('qCount').textContent = `Afirmación ${current+1} de ${QUESTIONS.length}`;
+  document.getElementById('qText').textContent = q.text;
+  const scale = document.getElementById('qScale');
+  scale.innerHTML = '';
+  LABELS.forEach((label,i)=>{
+    const val = i+1;
+    const div = document.createElement('div');
+    div.className = 'opt' + (answers[current]===val ? ' selected':'');
+    div.innerHTML = `<input type="radio" name="opt" ${answers[current]===val?'checked':''} /> <span>${label}</span>`;
+    div.onclick = ()=>{ answers[current]=val; renderQuestion(); };
+    scale.appendChild(div);
+  });
+  document.getElementById('btnBack').disabled = false;
+  document.getElementById('btnNext').disabled = answers[current]===null;
+  document.getElementById('btnNext').textContent = current===QUESTIONS.length-1 ? 'Ver mi avatar financiero' : 'Siguiente';
+}
+function nextQ(){
+  if(answers[current]===null) return;
+  if(current < QUESTIONS.length-1){ current++; renderQuestion(); }
+  else { showResults(); }
+}
+function prevQ(){
+  if(current>0){ current--; renderQuestion(); }
+  else { goTo('avatarIntro'); }
+}
+
+function showResults(){
+  const scores = {impulsivo:0, controlador:0, indiferente:0, equilibrado:0};
+  QUESTIONS.forEach((q,i)=>{ scores[q.cat]+=answers[i]; });
+  // Porcentajes relativos: cada avatar como proporción del total de puntos, no un % independiente.
+  // Así el dominante y el secundario reflejan de verdad cuánto pesa cada uno frente a los demás.
+  const total = Object.values(scores).reduce((a,b)=>a+b, 0);
+  const pct = {};
+  Object.keys(scores).forEach(k=>{ pct[k]=Math.round((scores[k]/total)*100); });
+  const order = Object.keys(pct).sort((a,b)=>pct[b]-pct[a]);
+  const top = order[0], second = order[1];
+  const topData = AVATARS[top];
+
+  document.getElementById('resTitle').textContent = topData.title;
+  document.getElementById('resDesc').textContent = topData.desc;
+  document.getElementById('resTerm').textContent = topData.term;
+  document.getElementById('resGloss').textContent = topData.gloss;
+  document.getElementById('resIntro').textContent = topData.intro;
+  document.getElementById('identityName').textContent = `${AVATARS[top].title} — ${AVATARS[second].title} (secundario)`;
+
+  lastResult = {
+    top: AVATARS[top],
+    second: AVATARS[second],
+    topPct: pct[top]
+  };
+
+  const barsEl = document.getElementById('bars');
+  barsEl.innerHTML='';
+  order.forEach(key=>{
+    const row = document.createElement('div');
+    row.className='bar-row';
+    row.innerHTML = `<div class="bar-label"><span>${AVATARS[key].title}</span><span>${pct[key]}%</span></div>
+      <div class="bar-track"><div class="bar-fill ${key===top?'top':''}" style="width:0%"></div></div>`;
+    barsEl.appendChild(row);
+  });
+
+  const detailEl = document.getElementById('detailCards');
+  detailEl.innerHTML='';
+  [top, second].forEach(key=>{
+    const c = AVATARS[key];
+    const card = document.createElement('div');
+    card.className='detail-card';
+    card.innerHTML = `<h3>${c.title}</h3>
+      <span class="tag">${key===top?'Dominante':'Secundario'}</span>
+      <p style="margin-top:10px;">${c.application}</p>
+      <div class="verse">${c.verseText}<cite>${c.verseCite}</cite></div>`;
+    detailEl.appendChild(card);
+  });
+
+  goTo('results');
+  setTimeout(()=>{
+    document.querySelectorAll('.bar-fill').forEach((el,i)=>{ el.style.width = pct[order[i]]+'%'; });
+  }, 80);
+}
+
+function restart(){
+  current = 0;
+  answers = new Array(QUESTIONS.length).fill(null);
+  patternState.fill(0);
+  refreshPatternUI();
+  refreshSummary();
+  document.getElementById('summaryPreviewWrap').style.display = 'none';
+  goTo('intro');
+}
+
+function cssVar(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight){
+  const words = text.split(' ');
+  let line = '', lines = [];
+  for(let n=0; n<words.length; n++){
+    const test = line + words[n] + ' ';
+    if(ctx.measureText(test).width > maxWidth && n > 0){
+      lines.push(line.trim());
+      line = words[n] + ' ';
+    } else {
+      line = test;
+    }
+  }
+  lines.push(line.trim());
+  lines.forEach((l,i)=> ctx.fillText(l, x, y + i*lineHeight));
+  return lines.length;
+}
+
+async function generateSummaryImage(){
+  if(!lastResult) return;
+  if(document.fonts && document.fonts.ready){ await document.fonts.ready; }
+
+  const canvas = document.getElementById('summaryCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  const dark = cssVar('--dark') || '#001527';
+  const gold = cssVar('--gold') || '#C79A4B';
+  const coral = cssVar('--coral') || '#BD8B40';
+  const sage = cssVar('--sage') || '#6FA184';
+
+  // Fondo
+  ctx.fillStyle = dark;
+  ctx.fillRect(0,0,W,H);
+
+  // Marco fino dorado
+  ctx.strokeStyle = 'rgba(199,154,75,.35)';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(28,28,W-56,H-56);
+
+  // Marca
+  ctx.fillStyle = gold;
+  ctx.font = '800 30px Montserrat, sans-serif';
+  ctx.fillText('FINANZAS SANAS', 72, 118);
+  ctx.fillStyle = '#B9CFC4';
+  ctx.font = '400 22px Montserrat, sans-serif';
+  ctx.fillText('Administra como Dios diseñó.', 72, 150);
+
+  // Eyebrow
+  ctx.fillStyle = coral;
+  ctx.font = '700 22px Montserrat, sans-serif';
+  ctx.fillText('MI DIAGNÓSTICO FINANCIERO · MÓDULO 3', 72, 240);
+
+  // Título avatar dominante
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = '600 66px Lora, serif';
+  let titleLines = wrapCanvasText(ctx, lastResult.top.title, 72, 335, W-144, 74);
+  let cursorY = 335 + titleLines*74 + 20;
+
+  // Palabra original
+  ctx.fillStyle = gold;
+  ctx.font = 'italic 600 34px Lora, serif';
+  ctx.fillText(lastResult.top.term, 72, cursorY);
+  cursorY += 42;
+  ctx.fillStyle = '#CBDDD3';
+  ctx.font = '400 22px Montserrat, sans-serif';
+  let glossLines = wrapCanvasText(ctx, lastResult.top.gloss, 72, cursorY, W-144, 30);
+  cursorY += glossLines*30 + 50;
+
+  // Línea dorada + versículo
+  ctx.fillStyle = gold;
+  ctx.fillRect(72, cursorY-28, 4, 110);
+  ctx.fillStyle = '#E9F1EC';
+  ctx.font = 'italic 400 27px Lora, serif';
+  let verseLines = wrapCanvasText(ctx, lastResult.top.verseText, 96, cursorY, W-192, 36);
+  cursorY += verseLines*36 + 12;
+  ctx.fillStyle = gold;
+  ctx.font = '400 20px Montserrat, sans-serif';
+  ctx.fillText(lastResult.top.verseCite, 96, cursorY);
+  cursorY += 70;
+
+  // Secundario
+  ctx.fillStyle = '#B9CFC4';
+  ctx.font = '400 22px Montserrat, sans-serif';
+  ctx.fillText('Personalidad secundaria: ' + lastResult.second.title, 72, cursorY);
+
+  // Pie
+  ctx.fillStyle = sage;
+  ctx.font = '600 20px Montserrat, sans-serif';
+  ctx.fillText('Módulo 3 · Taller de diagnóstico financiero', 72, H-96);
+  ctx.fillStyle = '#5A6570';
+  ctx.font = '400 18px Montserrat, sans-serif';
+  ctx.fillText(new Date().toLocaleDateString('es-CO', {year:'numeric', month:'long', day:'numeric'}), 72, H-64);
+
+  const dataUrl = canvas.toDataURL('image/png');
+  const img = document.getElementById('summaryPreviewImg');
+  img.src = dataUrl;
+  const link = document.getElementById('summaryDownloadLink');
+  link.href = dataUrl;
+  document.getElementById('summaryPreviewWrap').style.display = 'block';
+  document.getElementById('summaryPreviewWrap').scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+updateProgress('registro');
+</script>
+</body>
+</html>
