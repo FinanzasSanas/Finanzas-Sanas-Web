@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Crown, Mountain, Sprout, TrendingUp } from "lucide-react";
 
@@ -39,21 +40,31 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="relative mx-auto w-full max-w-md">
-          <div className="grid grid-cols-2 rounded-xl border border-white/15 bg-white/[0.03] overflow-hidden">
-            {quadrants.map(({ label, icon: Icon }) => (
-              <div
-                key={label}
-                className="flex flex-col items-center justify-center gap-3 border border-white/10 px-6 py-10 text-center"
-              >
-                <Icon className="text-sage" size={30} strokeWidth={1.5} />
-                <span className="text-xs font-bold tracking-wide text-white/90">{label}</span>
-              </div>
-            ))}
+        <div className="relative mx-auto w-full max-w-2xl lg:max-w-none">
+          <div className="relative overflow-hidden rounded-xl">
+            <Image
+              src="/images/hero-desk.png"
+              alt="Laptop con el logo de Finanzas Sanas sobre un escritorio, junto a una Biblia abierta"
+              width={656}
+              height={424}
+              priority
+              className="h-auto w-full object-cover"
+            />
+            <div className="absolute inset-y-0 left-0 grid w-[46%] grid-cols-2 bg-navy">
+              {quadrants.map(({ label, icon: Icon }) => (
+                <div
+                  key={label}
+                  className="flex flex-col items-center justify-center gap-2 border border-white/10 px-2 py-4 text-center"
+                >
+                  <Icon className="text-sage" size={24} strokeWidth={1.5} />
+                  <span className="text-[10px] font-bold tracking-wide text-white/90 sm:text-xs">{label}</span>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-20 w-20 flex-col items-center justify-center rounded-full bg-gold text-center text-white shadow-lg">
-            <span className="text-[10px] font-bold tracking-wide">GÉNESIS</span>
-            <span className="text-sm font-bold">1:28</span>
+          <div className="absolute left-[46%] top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-gold text-center text-white shadow-lg sm:h-20 sm:w-20">
+            <span className="text-[9px] font-bold tracking-wide sm:text-[10px]">GÉNESIS</span>
+            <span className="text-xs font-bold sm:text-sm">1:28</span>
           </div>
         </div>
       </div>
