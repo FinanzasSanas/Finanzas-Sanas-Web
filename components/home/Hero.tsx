@@ -37,7 +37,7 @@ export default function Hero() {
         <div className="hidden lg:block" />
       </div>
 
-      <div className="relative h-[320px] w-full sm:h-[420px] lg:absolute lg:inset-y-0 lg:left-1/2 lg:right-0 lg:h-auto lg:w-auto">
+      <div className="relative aspect-[1915/821] w-full lg:absolute lg:left-1/2 lg:right-0 lg:top-1/2 lg:w-auto lg:-translate-y-1/2">
         <Image
           src="/images/hero-photo.png"
           alt="Escritorio con laptop mostrando el logo de Finanzas Sanas, la tarjeta Fructificar/Multiplicar/Sojuzgar/Gobernar con el versículo Génesis 1:28, una Biblia abierta y libros"
