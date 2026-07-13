@@ -37,7 +37,7 @@ export default function Hero() {
         <div className="hidden lg:block" />
       </div>
 
-      <div className="relative aspect-[1915/821] w-full lg:absolute lg:left-1/2 lg:right-0 lg:top-1/2 lg:w-auto lg:-translate-y-1/2">
+      <div className="relative h-[320px] w-full sm:h-[420px] lg:absolute lg:inset-y-0 lg:left-1/2 lg:right-0 lg:h-auto lg:w-auto">
         <Image
           src="/images/hero-photo.png"
           alt="Escritorio con laptop mostrando el logo de Finanzas Sanas, la tarjeta Fructificar/Multiplicar/Sojuzgar/Gobernar con el versículo Génesis 1:28, una Biblia abierta y libros"
@@ -45,10 +45,10 @@ export default function Hero() {
           priority
           quality={90}
           sizes="(min-width: 1024px) 50vw, 100vw"
-          className="object-cover"
+          className="object-cover object-center"
           style={{
-            maskImage: "linear-gradient(to right, transparent 0%, transparent 12%, black 25%)",
-            WebkitMaskImage: "linear-gradient(to right, transparent 0%, transparent 12%, black 25%)",
+            maskImage: "linear-gradient(to right, transparent 0%, transparent 8%, black 25%)",
+            WebkitMaskImage: "linear-gradient(to right, transparent 0%, transparent 8%, black 25%)",
           }}
         />
       </div>
