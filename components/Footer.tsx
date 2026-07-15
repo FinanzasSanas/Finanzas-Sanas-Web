@@ -27,10 +27,10 @@ export default function Footer() {
 
         <div>
           <h4 className="text-white font-semibold text-sm tracking-wide mb-4">TALLER</h4>
-          <a href="/taller/index.html" className="flex items-center gap-2 text-sm text-sage hover:text-sage/80 transition-colors">
+          <Link href="/radiografia-financiera" className="flex items-center gap-2 text-sm text-sage hover:text-sage/80 transition-colors">
             <Sparkles size={16} />
             Radiografía Financiera
-          </a>
+          </Link>
         </div>
 
         <div>

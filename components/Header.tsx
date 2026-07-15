@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Menu, Sparkles, User, X } from "lucide-react";
+import { ChevronDown, Menu, ScanLine, Sparkles, User, X } from "lucide-react";
 import LogoMark from "./Logo";
 
 const entrenamientoLinks = [
@@ -50,6 +50,41 @@ function NavDropdown({ label, links }: { label: string; links: { label: string; 
   );
 }
 
+function ToolsDropdown() {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+      <button
+        className="flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-xs font-semibold text-white/90 hover:border-gold-light/50 hover:text-gold-light transition-colors whitespace-nowrap"
+        onClick={() => setOpen((v) => !v)}
+      >
+        HERRAMIENTAS
+        <ChevronDown size={14} />
+      </button>
+      {open && (
+        <div className="absolute left-0 top-full pt-3 z-50">
+          <div className="min-w-[260px] rounded-lg border border-white/10 bg-navy-dark shadow-xl overflow-hidden">
+            <a
+              href="/taller/index.html"
+              className="flex items-center gap-2 px-4 py-3 text-sm text-sage hover:bg-white/5 transition-colors"
+            >
+              <Sparkles size={16} />
+              Taller Interactivo
+            </a>
+            <Link
+              href="/radiografia-financiera"
+              className="flex items-center gap-2 px-4 py-3 text-sm text-gold-light hover:bg-white/5 transition-colors"
+            >
+              <ScanLine size={16} />
+              Herramientas para una buena administración
+            </Link>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function navLinkClass(active: boolean) {
   return active
     ? "text-sm font-semibold tracking-wide text-gold-light border-b-2 border-gold-light pb-1"
@@ -62,7 +97,7 @@ export default function Header() {
 
   return (
     <header className="bg-navy sticky top-0 z-50">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4">
         <Link href="/" className="flex items-center gap-3 shrink-0">
           <LogoMark className="h-10 w-10 text-white" />
           <div>
@@ -92,13 +127,7 @@ export default function Header() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-3 shrink-0">
-          <a
-            href="/taller/index.html"
-            className="flex items-center gap-2 rounded-full border border-sage/50 px-4 py-2 text-sm font-semibold text-sage hover:bg-sage/10 transition-colors"
-          >
-            <Sparkles size={16} />
-            TALLER INTERACTIVO
-          </a>
+          <ToolsDropdown />
           <a
             href="#"
             className="flex items-center gap-2 rounded-md bg-gold px-4 py-2 text-sm font-bold text-white hover:bg-gold-dark transition-colors"
@@ -141,6 +170,14 @@ export default function Header() {
             <Sparkles size={16} />
             TALLER INTERACTIVO
           </a>
+          <Link
+            href="/radiografia-financiera"
+            className="flex items-center gap-2 text-gold-light font-semibold"
+            onClick={() => setMobileOpen(false)}
+          >
+            <ScanLine size={16} />
+            HERRAMIENTAS PARA BUENA ADMINISTRACIÓN
+          </Link>
           <a href="#" className="flex items-center justify-center gap-2 rounded-md bg-gold px-4 py-2 text-sm font-bold text-white">
             <User size={16} />
             ACCESO ALUMNOS
