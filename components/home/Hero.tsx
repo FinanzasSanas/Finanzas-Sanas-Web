@@ -5,13 +5,30 @@ import { ArrowRight } from "lucide-react";
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-navy">
-      <div className="relative z-10 mx-auto grid max-w-7xl lg:grid-cols-2 lg:items-stretch">
-        <div className="flex flex-col justify-center px-6 py-16 md:py-20">
+      {/* Foto a todo lo ancho del bloque */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/hero-photo.png"
+          alt="Escritorio con laptop mostrando el logo de Finanzas Sanas, la tarjeta Fructificar/Multiplicar/Sojuzgar/Gobernar con el versículo Génesis 1:28, una Biblia abierta y libros"
+          fill
+          priority
+          quality={90}
+          sizes="100vw"
+          className="object-cover object-[72%_center]"
+        />
+        {/* Degradado navy a la izquierda: mantiene el titular nítido */}
+        <div className="absolute inset-0 bg-gradient-to-r from-navy from-5% via-navy/90 via-45% to-transparent to-75%" />
+        {/* Refuerzo inferior sutil para asentar el bloque */}
+        <div className="absolute inset-0 bg-gradient-to-t from-navy/40 to-transparent to-30%" />
+      </div>
+
+      <div className="relative z-10 mx-auto flex min-h-[520px] max-w-7xl items-center px-6 md:min-h-[560px]">
+        <div className="max-w-xl py-16 md:py-20">
           <h1 className="font-serif text-4xl md:text-5xl font-semibold leading-tight text-white">
             El <span className="text-sage">diseño original</span> de Dios para administrar los recursos.
           </h1>
           <div className="mt-6 h-1 w-16 bg-gold" />
-          <p className="mt-6 text-lg leading-relaxed text-white/80">
+          <p className="mt-6 text-lg leading-relaxed text-white/85">
             Permite que Su Palabra <span className="text-gold-light font-medium">restaure tu corazón</span>,{" "}
             <span className="text-sage font-medium">transforme tus finanzas</span> y forme un legado que{" "}
             <span className="text-gold-light font-medium">trascienda generaciones</span>.
@@ -32,25 +49,6 @@ export default function Hero() {
             </Link>
           </div>
         </div>
-
-        {/* Spacer: reserves the second grid column's width on desktop so the text column stays half-width; the actual photo is positioned absolutely below so it can bleed to the viewport edge. */}
-        <div className="hidden lg:block" />
-      </div>
-
-      <div className="relative z-0 h-[320px] w-full sm:h-[420px] lg:absolute lg:top-[40px] lg:right-0 lg:h-[411px] lg:w-[max(959px,calc(50vw_+_180px))]">
-        <Image
-          src="/images/hero-photo.png"
-          alt="Escritorio con laptop mostrando el logo de Finanzas Sanas, la tarjeta Fructificar/Multiplicar/Sojuzgar/Gobernar con el versículo Génesis 1:28, una Biblia abierta y libros"
-          fill
-          priority
-          quality={90}
-          sizes="(min-width: 1024px) 60vw, 100vw"
-          className="object-cover object-[30%_center] lg:object-contain lg:object-right-bottom"
-          style={{
-            maskImage: "linear-gradient(to right, transparent 0%, transparent 4%, black 12%)",
-            WebkitMaskImage: "linear-gradient(to right, transparent 0%, transparent 4%, black 12%)",
-          }}
-        />
       </div>
     </section>
   );
