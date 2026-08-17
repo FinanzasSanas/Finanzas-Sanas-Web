@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
-import { Lora, Montserrat } from "next/font/google";
+import { Fraunces, Lato } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const lora = Lora({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-lora",
+  display: "swap",
+  variable: "--font-fraunces",
 });
 
-const montserrat = Montserrat({
+const lato = Lato({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-montserrat",
+  weight: ["300", "400", "700"],
+  display: "swap",
+  variable: "--font-lato",
 });
 
 export const metadata: Metadata = {
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
-      <body className={`${lora.variable} ${montserrat.variable} font-sans antialiased`}>
+      <body className={`${fraunces.variable} ${lato.variable} font-sans antialiased`}>
         <Header />
         <main>{children}</main>
         <Footer />

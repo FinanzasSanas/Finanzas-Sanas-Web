@@ -27,8 +27,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        serif: ["var(--font-lora)", "Georgia", "serif"],
-        sans: ["var(--font-montserrat)", "system-ui", "sans-serif"],
+        serif: ["var(--font-fraunces)", "Georgia", "serif"],
+        sans: ["var(--font-lato)", "system-ui", "sans-serif"],
       },
     },
   },

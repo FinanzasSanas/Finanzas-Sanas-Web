@@ -99,7 +99,7 @@ export default function Header() {
     <header className="bg-navy sticky top-0 z-50">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4">
         <Link href="/" className="flex items-center gap-3 shrink-0">
-          <LogoMark className="h-10 w-10 text-white" />
+          <LogoMark height={44} />
           <div>
             <div className="font-serif text-lg font-semibold leading-tight text-white">
               FINANZAS

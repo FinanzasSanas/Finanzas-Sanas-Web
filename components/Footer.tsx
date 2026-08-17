@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-14 grid gap-10 md:grid-cols-4">
         <div>
           <div className="flex items-center gap-3 mb-4">
-            <LogoMark className="h-9 w-9 text-white" />
+            <LogoMark height={40} />
             <span className="font-serif text-base font-semibold text-white">FINANZAS SANAS</span>
           </div>
           <p className="text-sm leading-relaxed">Administra como Dios diseñó.</p>
